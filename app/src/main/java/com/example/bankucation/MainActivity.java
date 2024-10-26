@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         Button learn = findViewById(R.id.learn_btn);
-        Button plan = findViewById(R.id.learn_btn);
-        Button Reminder = findViewById(R.id.learn_btn);
+        Button plan = findViewById(R.id.plan_btn);
+        Button Reminder = findViewById(R.id.reminder_btn);
 
         learn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "your learning now", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(MainActivity.this, LessonActivity.class);
+                startActivity(intent);
+            }
+
+        });
+
+        plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "dictionary", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
                 startActivity(intent);
             }
 

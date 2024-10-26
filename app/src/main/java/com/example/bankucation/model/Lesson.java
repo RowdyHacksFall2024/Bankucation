@@ -8,22 +8,24 @@ import java.io.BufferedReader;
 import java.util.Scanner;
 
 public class Lesson {
-    private ArrayList<Dictionary> dictionaryBank;
+//    private ArrayList<Dictionary> dictionaryBank;
     private ArrayList<Question> quizBank;
 
     // Constructor
-    public Lesson(ArrayList<Dictionary> dictionaryBank, ArrayList<Question> quizBank) {
-        this.dictionaryBank = dictionaryBank;
+//    public Lesson(ArrayList<Dictionary> dictionaryBank, ArrayList<Question> quizBank) {
+    public Lesson(ArrayList<Question> quizBank) {
+
+//        this.dictionaryBank = dictionaryBank;
         this.quizBank = quizBank;
     }
 
     // Dictionary Bank
-    public ArrayList<Dictionary> getDictionaryBank() {
-        return dictionaryBank;
-    }
-    public void setDictionaryBank(ArrayList<Dictionary> dictionaryBank) {
-        this.dictionaryBank = dictionaryBank;
-    }
+//    public ArrayList<Dictionary> getDictionaryBank() {
+//        return dictionaryBank;
+//    }
+//    public void setDictionaryBank(ArrayList<Dictionary> dictionaryBank) {
+//        this.dictionaryBank = dictionaryBank;
+//    }
 
     // Quiz Bank
     public ArrayList<Question> getQuizBank() {
