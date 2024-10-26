@@ -35,4 +35,8 @@ public class Lesson {
     public void removeQuestion(int index) {
         quizBank.remove(index);
     }
+
+    public void loadQuizBank(String fileName) {
+
+    }
 }
