@@ -21,4 +21,8 @@ public class DictionaryActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+
+
+
 }
