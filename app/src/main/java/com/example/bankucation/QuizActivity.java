@@ -21,11 +21,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-public class QuestionActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity {
 
     Dictionary dictionary;
-    TextView termView;
-    TextView definition;
     private Map.Entry<String, String> currentEntry;
     private Iterator<Map.Entry<String, String>> iterator;
 
@@ -33,16 +31,16 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_quiz);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         Lesson lesson = loadQuestions();
 
     }
+
 
 
 

@@ -63,7 +63,6 @@ public class LessonActivity extends AppCompatActivity {
 //        term_textView.setText(dictionary.getDictionary().get(lesson.getQuestionIndex()).getQuestionText());
 //        definition_textView.setText(lesson.getQuizBank().get(lesson.getQuestionIndex()).getAnswerText());
 
-
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,15 +74,6 @@ public class LessonActivity extends AppCompatActivity {
                     Toast.makeText(LessonActivity.this,"Quiz Time!",Toast.LENGTH_SHORT).show();
                     quiz_btn.setVisibility(View.VISIBLE);
                 }
-            }
-        });
-
-        quiz_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LessonActivity.this, Question.class);
-                startActivity(intent);
-
                 if (iterator.hasNext()) {
                     Map.Entry<String, String> currentEntry = iterator.next();
                     term_textView.setText(currentEntry.getKey());
@@ -92,6 +82,14 @@ public class LessonActivity extends AppCompatActivity {
                     Intent questionIntent = new Intent(LessonActivity.this, QuestionActivity.class);
                     startActivity(questionIntent);
                 }
+            }
+        });
+
+        quiz_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LessonActivity.this, QuestionActivity.class);
+                startActivity(intent);
             }
         });
 
