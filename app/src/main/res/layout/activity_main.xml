@@ -40,6 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:backgroundTint="@color/black"
+        android:textColor="#ffffff"
         app:layout_constraintVertical_bias="0.383" />
 
     <Button
@@ -53,6 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#ffffff"
         android:backgroundTint="@color/black"
         app:layout_constraintVertical_bias="0.923" />
 
