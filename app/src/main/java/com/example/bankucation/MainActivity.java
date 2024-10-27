@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.bankucation.model.Dictionary;
 import com.example.bankucation.model.Lesson;
 import com.example.bankucation.model.Question;
 
@@ -75,8 +76,11 @@ public class MainActivity extends AppCompatActivity {
         try {
             InputStream inputStream = assetManager.open("questions.xml");
             quizBank = Lesson.loadQuizBank(inputStream);
-            Lesson newLesson = new Lesson(quizBank);
-            return newLesson;
+
+            Dictionary dictionary = new Dictionary();
+//            dictionary.loadDictionary(DictionaryActivity.class);    // FIXME method wants DictionaryActivity but this is main activity
+
+            return new Lesson(dictionary, quizBank);    // FIXME holds empty dictionary
         } catch (Exception e) {
             e.printStackTrace();
         }

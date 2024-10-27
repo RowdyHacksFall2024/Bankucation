@@ -7,27 +7,31 @@ import java.util.ArrayList;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Lesson {
-//    private ArrayList<Dictionary> dictionaryBank;
+    private Dictionary dictionaryBank;
     private ArrayList<Question> quizBank;
+    private int dictionaryIndex;
+    private int questionIndex;
 
     // Constructor
 //    public Lesson(ArrayList<Dictionary> dictionaryBank, ArrayList<Question> quizBank) {
-    public Lesson(ArrayList<Question> quizBank) {
+    public Lesson(Dictionary dictionaryBank, ArrayList<Question> quizBank) {
 
-//        this.dictionaryBank = dictionaryBank;
+        this.dictionaryBank = dictionaryBank;
         this.quizBank = quizBank;
+        this.questionIndex = 0;
     }
 
     // Dictionary Bank
-//    public ArrayList<Dictionary> getDictionaryBank() {
-//        return dictionaryBank;
-//    }
-//    public void setDictionaryBank(ArrayList<Dictionary> dictionaryBank) {
-//        this.dictionaryBank = dictionaryBank;
-//    }
+    public Dictionary getDictionaryBank() {
+        return dictionaryBank;
+    }
+    public void setDictionaryBank(Dictionary dictionaryBank) {
+        this.dictionaryBank = dictionaryBank;
+    }
 
     // Quiz Bank
     public ArrayList<Question> getQuizBank() {
@@ -44,6 +48,37 @@ public class Lesson {
     }
     public void removeQuestion(int index) {
         quizBank.remove(index);
+    }
+
+    // Dictionary Index
+    public int getDictionaryIndex() {
+        return dictionaryIndex;
+    }
+    public void setDictionaryIndex(int dictionaryIndex) {
+        this.dictionaryIndex = dictionaryIndex;
+    }
+    public void incDictionaryIndex() {  // Increment
+        setDictionaryIndex(getDictionaryIndex() + 1);
+    }
+
+    // Question Index
+    public int getQuestionIndex() {
+        return questionIndex;
+    }
+    public void setQuestionIndex(int questionIndex) {
+        this.questionIndex = questionIndex;
+    }
+    public void incQuestionIndex() {    // Increment
+        setQuestionIndex(getQuestionIndex() + 1);
+    }
+
+    // Progress
+    public int getTotalIndexes () {
+        return getQuizBank().size() + getDictionaryBank().getDictionary().size();
+    }
+    public int getProgress() {
+        double percentage = (double)(getQuestionIndex() + getDictionaryIndex()) / getTotalIndexes();
+        return (int)percentage;
     }
 
     // Load arraylist of questions from XML file
