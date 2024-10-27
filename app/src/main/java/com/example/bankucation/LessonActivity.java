@@ -69,7 +69,7 @@ public class LessonActivity extends AppCompatActivity {
                 int progress= progressBar.getProgress();
                 progressBar.setProgress(progress+10);
                 if (progress +10  == 90)
-                Toast.makeText(LessonActivity.this,"Almost There",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LessonActivity.this,"Almost There...",Toast.LENGTH_SHORT).show();
                 if (progress >= 100) {
                     Toast.makeText(LessonActivity.this,"Quiz Time!",Toast.LENGTH_SHORT).show();
                     quiz_btn.setVisibility(View.VISIBLE);

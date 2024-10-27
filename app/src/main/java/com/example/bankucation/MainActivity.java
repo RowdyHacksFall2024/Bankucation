@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         learn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {    // Learn Button Pressed
-                Toast.makeText(MainActivity.this, "your learning now", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "You're learning now!", Toast.LENGTH_SHORT).show();
 
                 // Open LessonActivity
                 Intent intent = new Intent(MainActivity.this, LessonActivity.class);
