@@ -13,7 +13,11 @@
         android:theme="@style/Theme.Bankucation"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
+            android:name=".QuestionActivity"
+=======
             android:name=".CompletionActivity"
+>>>>>>> e3dc7c65a0a928c1047fe9e978e9bacbdb64fe76
             android:exported="false" />
         <activity
             android:name=".LessonActivity"
