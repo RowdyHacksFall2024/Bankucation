@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         Button learn = findViewById(R.id.learn_btn);
-        Button plan = findViewById(R.id.plan_btn);
-        Button Reminder = findViewById(R.id.reminder_btn);
+        Button dictionary = findViewById(R.id.dictionary_btn);
+
 
         learn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        plan.setOnClickListener(new View.OnClickListener() {
+        dictionary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "dictionary", Toast.LENGTH_SHORT).show();
