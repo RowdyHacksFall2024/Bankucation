@@ -26,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Zachary Code
-//        loadQuestions();
-//        System.out.println(getLesson()); // FIXME crashes app
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -41,26 +38,31 @@ public class MainActivity extends AppCompatActivity {
         Button learn = findViewById(R.id.learn_btn);
         Button dictionary = findViewById(R.id.dictionary_btn);
 
+        // Create Lesson Object
         Lesson lesson = loadQuestions();
         System.out.println(lesson);
 
 
+        // Learn Button Listener
         learn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {    // Learn Button Pressed
                 Toast.makeText(MainActivity.this, "your learning now", Toast.LENGTH_SHORT).show();
 
+                // Open LessonActivity
                 Intent intent = new Intent(MainActivity.this, LessonActivity.class);
                 startActivity(intent);
             }
 
         });
 
+        // Dictionary Button Listener
         dictionary.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {    // Dictionary Button Pressed
                 Toast.makeText(MainActivity.this, "dictionary", Toast.LENGTH_SHORT).show();
 
+                // Open DictionaryActivity
                 Intent intent = new Intent(MainActivity.this, DictionaryActivity.class);
                 startActivity(intent);
             }
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Zachary code
+    // Load Questions and dictionary from file and return the lesson with both
     public Lesson loadQuestions() {
         Log.d("Load Questions", "Get Assets");
         ArrayList<Question> quizBank = new ArrayList<Question>();
@@ -84,11 +87,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return null;    // Could not load questions
     }
-
-    // DELETEME
-//    public Lesson getLesson() {
-//        return lesson;
-//    }
 }

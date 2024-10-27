@@ -39,10 +39,16 @@ public class LessonActivity extends AppCompatActivity {
             }
         });
 
+        // Zachary code
+        // Skip Button Listener
+        skip_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {    // Skip button pressed
 
-
-
-
+                // Open completion window
+                Intent completionIntent = new Intent(LessonActivity.this, CompletionActivity.class);
+                startActivity(completionIntent);
+            }
+        });
     }
-
 }
