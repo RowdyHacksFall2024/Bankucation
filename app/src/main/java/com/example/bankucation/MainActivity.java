@@ -81,12 +81,12 @@ public class MainActivity extends AppCompatActivity {
             quizBank = Lesson.loadQuizBank(inputStream);
 
             Dictionary dictionary = new Dictionary();
-//            dictionary.loadDictionary(DictionaryActivity.class);    // FIXME method wants DictionaryActivity but this is main activity
+           dictionary.loadDictionary(this);
 
             return new Lesson(dictionary, quizBank);    // FIXME holds empty dictionary
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;    // Could not load questions
+        return null;
     }
 }

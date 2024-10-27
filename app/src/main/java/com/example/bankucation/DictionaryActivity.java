@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.bankucation.model.Dictionary;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -33,7 +34,11 @@ public class DictionaryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        createDictionary();
+        try {
+            createDictionary();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         termView = findViewById(R.id.termView);
         definition = findViewById(R.id.definition);
         Button next = findViewById(R.id.next);
@@ -69,7 +74,7 @@ public class DictionaryActivity extends AppCompatActivity {
     }
 
 
-    private void createDictionary(){
+    private void createDictionary() throws IOException {
         Dictionary dictionary = new Dictionary();
         dictionary.loadDictionary(this);
         this.dictionary = dictionary;
