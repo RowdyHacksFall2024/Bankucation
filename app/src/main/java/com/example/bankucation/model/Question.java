@@ -3,6 +3,7 @@ package com.example.bankucation.model;
 import java.util.ArrayList;
 
 public class Question {
+    // class variables
     private String questionText;
     private String answerText;
     private ArrayList<String> otherChoices;

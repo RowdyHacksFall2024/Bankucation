@@ -1,0 +1,13 @@
+<QuizBank>
+    <Question>
+        <QuestionText>
+            You should spend all of your money
+        </QuestionText>
+        <AnswerText>
+            False
+        </AnswerText>
+        <OtherChoice>
+            True
+        </OtherChoice>
+    </Question>
+</QuizBank>
