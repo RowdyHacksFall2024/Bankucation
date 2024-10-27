@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Bankucation"
         tools:targetApi="31">
         <activity
+            android:name=".QuestionActivity"
+            android:exported="false" />
+        <activity
             android:name=".LessonActivity"
             android:exported="false" />
         <activity

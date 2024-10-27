@@ -13,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.bankucation.model.Question;
+
 public class LessonActivity extends AppCompatActivity {
 
     @Override
@@ -27,19 +29,33 @@ public class LessonActivity extends AppCompatActivity {
         });
 
         Button next_btn = findViewById(R.id.next_btn);
-        Button skip_btn = findViewById(R.id.skip_btn);
         ProgressBar progressBar = findViewById(R.id.progressBar);
+        Button quiz_btn = findViewById(R.id.quiz_btn);
 
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int progress= progressBar.getProgress();
                 progressBar.setProgress(progress+10);
+                if (progress >80)
                 Toast.makeText(LessonActivity.this,"Almost There",Toast.LENGTH_SHORT).show();
+
+                if (progress + 10 >= 100) {
+                    Toast.makeText(LessonActivity.this,"LESSON DONE!!!",Toast.LENGTH_SHORT).show();
+                    quiz_btn.setVisibility(View.VISIBLE);
+                }
+
             }
         });
 
-
+        quiz_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LessonActivity.this,"QUIZ TIME!!!",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LessonActivity.this,QuestionActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
