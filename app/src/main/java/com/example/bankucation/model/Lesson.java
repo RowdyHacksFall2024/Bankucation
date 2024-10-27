@@ -1,5 +1,10 @@
 package com.example.bankucation.model;
+import android.content.res.AssetManager;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -7,6 +12,7 @@ import java.util.ArrayList;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -22,6 +28,7 @@ public class Lesson {
 
         this.dictionaryBank = dictionaryBank;
         this.quizBank = quizBank;
+        this.dictionaryIndex = 0;
         this.questionIndex = 0;
     }
 
@@ -148,4 +155,6 @@ public class Lesson {
         }
         return output;
     }
+
 }
+
