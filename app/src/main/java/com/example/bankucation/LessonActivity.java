@@ -27,7 +27,7 @@ public class LessonActivity extends AppCompatActivity {
         });
 
         Button next_btn = findViewById(R.id.next_btn);
-        Button skip_btn = findViewById(R.id.skip_btn);
+
         ProgressBar progressBar = findViewById(R.id.progressBar);
 
         next_btn.setOnClickListener(new View.OnClickListener() {
