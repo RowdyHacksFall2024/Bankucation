@@ -1,6 +1,8 @@
 package com.example.bankucation.model;
 
 import android.content.res.AssetManager;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
@@ -11,13 +13,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Dictionary {
+public class Dictionary implements Parcelable {
     Map<String, String> dictionary;
 
     public Dictionary(){
         dictionary = new HashMap<>();
 
     }
+
+    protected Dictionary(Parcel in) {
+    }
+
+    public static final Creator<Dictionary> CREATOR = new Creator<Dictionary>() {
+        @Override
+        public Dictionary createFromParcel(Parcel in) {
+            return new Dictionary(in);
+        }
+
+        @Override
+        public Dictionary[] newArray(int size) {
+            return new Dictionary[size];
+        }
+    };
 
     @NonNull
     @Override
@@ -52,4 +69,12 @@ public class Dictionary {
         }
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+    }
 }
