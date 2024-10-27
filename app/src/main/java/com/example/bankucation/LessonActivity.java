@@ -44,6 +44,8 @@ public class LessonActivity extends AppCompatActivity {
         });
 
         Button next_btn = findViewById(R.id.next_btn);
+//        Button skip_btn = findViewById(R.id.skip_btn);
+        Button quiz_btn = findViewById((R.id.quiz_btn));
         ProgressBar progressBar = findViewById(R.id.progressBar);
 
         TextView term_textView = findViewById(R.id.term_textView);
@@ -67,7 +69,20 @@ public class LessonActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int progress= progressBar.getProgress();
                 progressBar.setProgress(progress+10);
+                if (progress +10  == 90)
                 Toast.makeText(LessonActivity.this,"Almost There",Toast.LENGTH_SHORT).show();
+                if (progress >= 100) {
+                    Toast.makeText(LessonActivity.this,"Quiz Time!",Toast.LENGTH_SHORT).show();
+                    quiz_btn.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        quiz_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LessonActivity.this, Question.class);
+                startActivity(intent);
 
                 if (iterator.hasNext()) {
                     Map.Entry<String, String> currentEntry = iterator.next();
@@ -80,6 +95,17 @@ public class LessonActivity extends AppCompatActivity {
             }
         });
 
+        // Zachary code
+        // Skip Button Listener
+//        skip_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {    // Skip button pressed
+//
+//                // Open completion window
+//                Intent completionIntent = new Intent(LessonActivity.this, CompletionActivity.class);
+//                startActivity(completionIntent);
+//            }
+//        });
     }
     public Lesson loadQuestions() {
         Log.d("Load Questions", "Get Assets");
@@ -96,7 +122,7 @@ public class LessonActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
 
-            return new Lesson(dictionary, quizBank);
+            return new Lesson(dictionary, quizBank);    // FIXME holds empty dictionary
         } catch (Exception e) {
             e.printStackTrace();
         }
