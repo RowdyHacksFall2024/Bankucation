@@ -27,4 +27,46 @@
             Red Card
         </OtherChoice>
     </Question>
+    <Question>
+        <QuestionText>
+            You should share your pin win your friends
+        </QuestionText>
+        <AnswerText>
+            False
+        </AnswerText>
+        <OtherChoice>
+            True
+        </OtherChoice>
+        <OtherChoice>
+            None of the Above
+        </OtherChoice>
+    </Question>
+    <Question>
+        <QuestionText>
+            You should spend all of your money
+        </QuestionText>
+        <AnswerText>
+            False
+        </AnswerText>
+        <OtherChoice>
+            True
+        </OtherChoice>
+        <OtherChoice>
+            None of the Above
+        </OtherChoice>
+    </Question>
+    <Question>
+        <QuestionText>
+            You can wait as long as you want to pay off credit cards
+        </QuestionText>
+        <AnswerText>
+            False
+        </AnswerText>
+        <OtherChoice>
+            True
+        </OtherChoice>
+        <OtherChoice>
+            None of the Above
+        </OtherChoice>
+    </Question>
 </QuizBank>
