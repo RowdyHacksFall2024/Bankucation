@@ -1,0 +1,30 @@
+<QuizBank>
+    <Question>
+        <QuestionText>
+            You should spend all of your money
+        </QuestionText>
+        <AnswerText>
+            False
+        </AnswerText>
+        <OtherChoice>
+            True
+        </OtherChoice>
+        <OtherChoice>
+            None of the Above
+        </OtherChoice>
+    </Question>
+    <Question>
+        <QuestionText>
+            Which card immediately deducts money from your account?
+        </QuestionText>
+        <AnswerText>
+            Debit Card
+        </AnswerText>
+        <OtherChoice>
+            Credit Card
+        </OtherChoice>
+        <OtherChoice>
+            Red Card
+        </OtherChoice>
+    </Question>
+</QuizBank>

@@ -7,27 +7,31 @@ import java.util.ArrayList;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Lesson {
-//    private ArrayList<Dictionary> dictionaryBank;
+    private Dictionary dictionaryBank;
     private ArrayList<Question> quizBank;
+    private int dictionaryIndex;
+    private int questionIndex;
 
     // Constructor
 //    public Lesson(ArrayList<Dictionary> dictionaryBank, ArrayList<Question> quizBank) {
-    public Lesson(ArrayList<Question> quizBank) {
+    public Lesson(Dictionary dictionaryBank, ArrayList<Question> quizBank) {
 
-//        this.dictionaryBank = dictionaryBank;
+        this.dictionaryBank = dictionaryBank;
         this.quizBank = quizBank;
+        this.questionIndex = 0;
     }
 
     // Dictionary Bank
-//    public ArrayList<Dictionary> getDictionaryBank() {
-//        return dictionaryBank;
-//    }
-//    public void setDictionaryBank(ArrayList<Dictionary> dictionaryBank) {
-//        this.dictionaryBank = dictionaryBank;
-//    }
+    public Dictionary getDictionaryBank() {
+        return dictionaryBank;
+    }
+    public void setDictionaryBank(Dictionary dictionaryBank) {
+        this.dictionaryBank = dictionaryBank;
+    }
 
     // Quiz Bank
     public ArrayList<Question> getQuizBank() {
@@ -46,44 +50,82 @@ public class Lesson {
         quizBank.remove(index);
     }
 
+    // Dictionary Index
+    public int getDictionaryIndex() {
+        return dictionaryIndex;
+    }
+    public void setDictionaryIndex(int dictionaryIndex) {
+        this.dictionaryIndex = dictionaryIndex;
+    }
+    public void incDictionaryIndex() {  // Increment
+        setDictionaryIndex(getDictionaryIndex() + 1);
+    }
+
+    // Question Index
+    public int getQuestionIndex() {
+        return questionIndex;
+    }
+    public void setQuestionIndex(int questionIndex) {
+        this.questionIndex = questionIndex;
+    }
+    public void incQuestionIndex() {    // Increment
+        setQuestionIndex(getQuestionIndex() + 1);
+    }
+
+    // Progress
+    public int getTotalIndexes () {
+        return getQuizBank().size() + getDictionaryBank().getDictionary().size();
+    }
+    public int getProgress() {
+        double percentage = (double)(getQuestionIndex() + getDictionaryIndex()) / getTotalIndexes();
+        return (int)percentage;
+    }
+
     // Load arraylist of questions from XML file
     public static ArrayList<Question> loadQuizBank(InputStream inputStream) {
         Log.d("Lesson", "Load Quiz Bank");
 
+        // Try reading Questions file
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             ArrayList<Question> quizBank = new ArrayList<Question>();
 
             String line;
-            while ((line = reader.readLine()).trim().replace("\t","") != null) {
-                // new quizbank
+            while ((line = reader.readLine()) != null) {
+                // New QuizBank
+                line.trim().replace("\t","");
                 if(line.equals("<QuizBank>")) {
                     while (!(line = reader.readLine().trim().replace("\t","")).equals("</QuizBank>")) {
-//                        line = reader.readLine().trim();
                         String questionText = "";
                         String answerText = "";
                         ArrayList<String> otherAnswers = new ArrayList<String>();
-                        // new question
-                        if (line.equals("<Question>")) {
-                            Log.d("Question", "Load Quiz Bank");
 
+                        // New Question
+                        if (line.equals("<Question>")) {
+                            // Read Question Text
                             if ((line = reader.readLine().trim().replace("\t","")).equals("<QuestionText>")) {
                                 questionText = reader.readLine().trim();
                             }
-                            reader.readLine();
+                            line = reader.readLine();
+
+                            // Read Answer Text
                             if ((line = reader.readLine().trim().replace("\t","")).equals("<AnswerText>")) {
                                 answerText = reader.readLine().trim();
                             }
-                            reader.readLine();
+                            line = reader.readLine();
+
+                            // Read Other Choices
                             while ((line = reader.readLine().trim().replace("\t","")).equals("<OtherChoice>")) {
                                 otherAnswers.add(reader.readLine().trim());
-                                reader.readLine();
+                                line = reader.readLine();
                             }
                         }
+                        // Add whole question to quizBank
                         quizBank.add(new Question(questionText, answerText, otherAnswers));
                     }
                 }
             }
-            return quizBank;
+            return quizBank;    // Return entire quizBank
+
         } catch (Exception e)    {
             e.printStackTrace();
         }
@@ -93,14 +135,16 @@ public class Lesson {
     // toString
     public String toString() {
         String output = "";
-        System.out.println(quizBank.size());
         for (int i = 0; i < quizBank.size(); i++) {
-            output += quizBank.get(i).getQuestionText() + "\n";
-            output += quizBank.get(i).getAnswerText() + "\n";
+            output += "Question Text: " + quizBank.get(i).getQuestionText() + "\n";
+            output += "Answer Text:   " + quizBank.get(i).getAnswerText() + "\nOther Answers: ";
             for (int j = 0; j < quizBank.get(i).getOtherChoices().size(); j++) {
-                output += quizBank.get(i).getOtherChoices().get(j) + "\n";
+                if (j > 0) {
+                    output += ", ";
+                }
+                output += quizBank.get(i).getOtherChoices().get(j);
             }
-            output += "\n";
+            output += "\n\n";
         }
         return output;
     }
