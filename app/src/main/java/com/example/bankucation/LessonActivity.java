@@ -20,10 +20,17 @@ import com.example.bankucation.model.Dictionary;
 import com.example.bankucation.model.Lesson;
 import com.example.bankucation.model.Question;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class LessonActivity extends AppCompatActivity {
+    Dictionary dictionary;
+    private Map.Entry<String, String> currentEntry;
+    private Iterator<Map.Entry<String, String>> iterator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,6 @@ public class LessonActivity extends AppCompatActivity {
         });
 
         Button next_btn = findViewById(R.id.next_btn);
-//        Button skip_btn = findViewById(R.id.skip_btn);
         ProgressBar progressBar = findViewById(R.id.progressBar);
 
         TextView term_textView = findViewById(R.id.term_textView);
@@ -45,8 +51,15 @@ public class LessonActivity extends AppCompatActivity {
 
         Lesson lesson = loadQuestions();
 
-        term_textView.setText(lesson.getQuizBank().get(lesson.getQuestionIndex()).getQuestionText());
-        definition_textView.setText(lesson.getQuizBank().get(lesson.getQuestionIndex()).getAnswerText());
+        iterator = dictionary.getDictionary().entrySet().iterator();
+        if (iterator.hasNext()) {
+            Map.Entry<String, String> currentEntry = iterator.next();
+            term_textView.setText(currentEntry.getKey());
+            definition_textView.setText(currentEntry.getValue());
+        }
+
+//        term_textView.setText(dictionary.getDictionary().get(lesson.getQuestionIndex()).getQuestionText());
+//        definition_textView.setText(lesson.getQuizBank().get(lesson.getQuestionIndex()).getAnswerText());
 
 
         next_btn.setOnClickListener(new View.OnClickListener() {
@@ -55,20 +68,18 @@ public class LessonActivity extends AppCompatActivity {
                 int progress= progressBar.getProgress();
                 progressBar.setProgress(progress+10);
                 Toast.makeText(LessonActivity.this,"Almost There",Toast.LENGTH_SHORT).show();
+
+                if (iterator.hasNext()) {
+                    Map.Entry<String, String> currentEntry = iterator.next();
+                    term_textView.setText(currentEntry.getKey());
+                    definition_textView.setText(currentEntry.getValue());
+                } else {
+                    Intent questionIntent = new Intent(LessonActivity.this, QuestionActivity.class);
+                    startActivity(questionIntent);
+                }
             }
         });
 
-        // Zachary code
-        // Skip Button Listener
-//        skip_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {    // Skip button pressed
-//
-//                // Open completion window
-//                Intent completionIntent = new Intent(LessonActivity.this, CompletionActivity.class);
-//                startActivity(completionIntent);
-//            }
-//        });
     }
     public Lesson loadQuestions() {
         Log.d("Load Questions", "Get Assets");
@@ -78,13 +89,23 @@ public class LessonActivity extends AppCompatActivity {
             InputStream inputStream = assetManager.open("questions.xml");
             quizBank = Lesson.loadQuizBank(inputStream);
 
-            Dictionary dictionary = new Dictionary();
-//            dictionary.loadDictionary(DictionaryActivity.class);    // FIXME method wants DictionaryActivity but this is main activity
+//            Dictionary dictionary = new Dictionary();
+            try {
+                createDictionary();
+            } catch (Exception e){
+                throw new RuntimeException(e);
+            }
 
-            return new Lesson(dictionary, quizBank);    // FIXME holds empty dictionary
+            return new Lesson(dictionary, quizBank);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;    // Could not load questions
+    }
+
+    private void createDictionary() throws IOException {
+        Dictionary dictionary = new Dictionary();
+        dictionary.loadDictionary(this);
+        this.dictionary = dictionary;
     }
 }

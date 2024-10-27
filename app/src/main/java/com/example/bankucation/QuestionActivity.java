@@ -30,6 +30,7 @@ public class QuestionActivity extends AppCompatActivity {
             return insets;
         });
     }
+
     Lesson lesson = loadQuestions();
 
     public Lesson loadQuestions() {
