@@ -1,4 +1,6 @@
 package com.example.bankucation.model;
+import android.util.Log;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -46,30 +48,33 @@ public class Lesson {
 
     // Load arraylist of questions from XML file
     public static ArrayList<Question> loadQuizBank(InputStream inputStream) {
+        Log.d("Lesson", "Load Quiz Bank");
+
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             ArrayList<Question> quizBank = new ArrayList<Question>();
 
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()).trim().replace("\t","") != null) {
                 // new quizbank
                 if(line.equals("<QuizBank>")) {
-                    while (!(line = reader.readLine()).trim().equals("</QuizBank>")) {
-                        line = reader.readLine().trim();
+                    while (!(line = reader.readLine().trim().replace("\t","")).equals("</QuizBank>")) {
+//                        line = reader.readLine().trim();
                         String questionText = "";
                         String answerText = "";
                         ArrayList<String> otherAnswers = new ArrayList<String>();
                         // new question
                         if (line.equals("<Question>")) {
+                            Log.d("Question", "Load Quiz Bank");
 
-                            if ((line = reader.readLine().trim()).equals("<QuestionText>")) {
+                            if ((line = reader.readLine().trim().replace("\t","")).equals("<QuestionText>")) {
                                 questionText = reader.readLine().trim();
                             }
                             reader.readLine();
-                            if ((line = reader.readLine().trim()).equals("<AnswerText>")) {
+                            if ((line = reader.readLine().trim().replace("\t","")).equals("<AnswerText>")) {
                                 answerText = reader.readLine().trim();
                             }
                             reader.readLine();
-                            while ((line = reader.readLine().trim()).equals("<OtherChoice>")) {
+                            while ((line = reader.readLine().trim().replace("\t","")).equals("<OtherChoice>")) {
                                 otherAnswers.add(reader.readLine().trim());
                                 reader.readLine();
                             }
@@ -83,5 +88,20 @@ public class Lesson {
             e.printStackTrace();
         }
         return null;
+    }
+
+    // toString
+    public String toString() {
+        String output = "";
+        System.out.println(quizBank.size());
+        for (int i = 0; i < quizBank.size(); i++) {
+            output += quizBank.get(i).getQuestionText() + "\n";
+            output += quizBank.get(i).getAnswerText() + "\n";
+            for (int j = 0; j < quizBank.get(i).getOtherChoices().size(); j++) {
+                output += quizBank.get(i).getOtherChoices().get(j) + "\n";
+            }
+            output += "\n";
+        }
+        return output;
     }
 }
