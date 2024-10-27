@@ -50,40 +50,47 @@ public class Lesson {
     public static ArrayList<Question> loadQuizBank(InputStream inputStream) {
         Log.d("Lesson", "Load Quiz Bank");
 
+        // Try reading Questions file
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             ArrayList<Question> quizBank = new ArrayList<Question>();
 
             String line;
-            while ((line = reader.readLine()).trim().replace("\t","") != null) {
-                // new quizbank
+            while ((line = reader.readLine()) != null) {
+                // New QuizBank
+                line.trim().replace("\t","");
                 if(line.equals("<QuizBank>")) {
                     while (!(line = reader.readLine().trim().replace("\t","")).equals("</QuizBank>")) {
-//                        line = reader.readLine().trim();
                         String questionText = "";
                         String answerText = "";
                         ArrayList<String> otherAnswers = new ArrayList<String>();
-                        // new question
-                        if (line.equals("<Question>")) {
-                            Log.d("Question", "Load Quiz Bank");
 
+                        // New Question
+                        if (line.equals("<Question>")) {
+                            // Read Question Text
                             if ((line = reader.readLine().trim().replace("\t","")).equals("<QuestionText>")) {
                                 questionText = reader.readLine().trim();
                             }
-                            reader.readLine();
+                            line = reader.readLine();
+
+                            // Read Answer Text
                             if ((line = reader.readLine().trim().replace("\t","")).equals("<AnswerText>")) {
                                 answerText = reader.readLine().trim();
                             }
-                            reader.readLine();
+                            line = reader.readLine();
+
+                            // Read Other Choices
                             while ((line = reader.readLine().trim().replace("\t","")).equals("<OtherChoice>")) {
                                 otherAnswers.add(reader.readLine().trim());
-                                reader.readLine();
+                                line = reader.readLine();
                             }
                         }
+                        // Add whole question to quizBank
                         quizBank.add(new Question(questionText, answerText, otherAnswers));
                     }
                 }
             }
-            return quizBank;
+            return quizBank;    // Return entire quizBank
+
         } catch (Exception e)    {
             e.printStackTrace();
         }
@@ -93,14 +100,16 @@ public class Lesson {
     // toString
     public String toString() {
         String output = "";
-        System.out.println(quizBank.size());
         for (int i = 0; i < quizBank.size(); i++) {
-            output += quizBank.get(i).getQuestionText() + "\n";
-            output += quizBank.get(i).getAnswerText() + "\n";
+            output += "Question Text: " + quizBank.get(i).getQuestionText() + "\n";
+            output += "Answer Text:   " + quizBank.get(i).getAnswerText() + "\nOther Answers: ";
             for (int j = 0; j < quizBank.get(i).getOtherChoices().size(); j++) {
-                output += quizBank.get(i).getOtherChoices().get(j) + "\n";
+                if (j > 0) {
+                    output += ", ";
+                }
+                output += quizBank.get(i).getOtherChoices().get(j);
             }
-            output += "\n";
+            output += "\n\n";
         }
         return output;
     }

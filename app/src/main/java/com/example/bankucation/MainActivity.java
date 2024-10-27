@@ -21,12 +21,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     // Zachary code
-    private Lesson lesson;
+//    private Lesson lesson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Zachary Code
-        loadQuestions();
+//        loadQuestions();
 //        System.out.println(getLesson()); // FIXME crashes app
 
         super.onCreate(savedInstanceState);
@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         });
         Button learn = findViewById(R.id.learn_btn);
         Button dictionary = findViewById(R.id.dictionary_btn);
+
+        Lesson lesson = loadQuestions();
+        System.out.println(lesson);
 
 
         learn.setOnClickListener(new View.OnClickListener() {
@@ -65,20 +68,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Zachary code
-    public void loadQuestions() {
+    public Lesson loadQuestions() {
         Log.d("Load Questions", "Get Assets");
         ArrayList<Question> quizBank = new ArrayList<Question>();
         AssetManager assetManager = this.getAssets();
         try {
-            InputStream inputStream = assetManager.open("questions.txt");
+            InputStream inputStream = assetManager.open("questions.xml");
             quizBank = Lesson.loadQuizBank(inputStream);
-            lesson = new Lesson(quizBank);
+            Lesson newLesson = new Lesson(quizBank);
+            return newLesson;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public Lesson getLesson() {
-        return lesson;
-    }
+    // DELETEME
+//    public Lesson getLesson() {
+//        return lesson;
+//    }
 }
